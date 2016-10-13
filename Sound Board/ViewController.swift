@@ -8,18 +8,36 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var sounds : [Sound] = []
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+      tableView.dataSource = self
+        tableView.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        return sounds.count
     }
-
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let cell = UITableViewCell()
+        
+        let sound = sounds[indexPath.row]
+        cell.textLabel?.text = sound.name
+        return cell
+        
+        
+    }
+    
 }
 
